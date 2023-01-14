@@ -13,6 +13,7 @@
                 type="text"
                 placeholder="Enter your address"
                 v-model="address"
+                id="autocomplete"
               />
               <i class="dot circle link icon" @click="locatorButtonPressed"></i>
             </div>
@@ -34,6 +35,12 @@ export default {
       error: "",
       spinner: false
     };
+  },
+
+  mounted() {
+    new google.maps.places.Autocomplete(
+      document.getElementById("autocomplete")
+    );
   },
 
   methods: {
