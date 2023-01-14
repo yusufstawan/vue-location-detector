@@ -1,21 +1,14 @@
-# my-first-project
+## VUE LOCATION DETECTOR
 
-> A Vue.js project
+Example code to detect your location using Google Map API in Vue JS, you can click to show your location on the map or search for a location and show it on the map.
 
-## Build Setup
+## Project setup
 
-``` bash
-# install dependencies
+```
 npm install
-
-# serve with hot reload at localhost:8080
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Example
+
+https://vue-location-detector.yusufstawan.com/
