@@ -2,10 +2,13 @@
   <section class="ui two column centered grid">
     <div class="column">
       <form class="ui segment large form">
-        <div class="ui message red"></div>
+        <div class="ui message red" v-show="error">{{ error }}</div>
         <div class="ui segment">
           <div class="field">
-            <div class="ui right icon input large">
+            <div
+              class="ui right icon input large"
+              :class="{ loading: spinner }"
+            >
               <input
                 type="text"
                 placeholder="Enter your address"
@@ -27,12 +30,16 @@ import axios from "axios";
 export default {
   data() {
     return {
-      address: ""
+      address: "",
+      error: "",
+      spinner: false
     };
   },
 
   methods: {
     locatorButtonPressed() {
+      this.spinner = true;
+
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           position => {
@@ -42,10 +49,13 @@ export default {
             );
           },
           error => {
-            console.log(error.message);
+            this.error =
+              "Locator is unable to find your address. Please type your address manually";
+            this.spinner = false;
           }
         );
       } else {
+        this.error = error.message;
         console.log("Your browser does not support geolocation API");
       }
     },
@@ -60,13 +70,17 @@ export default {
         )
         .then(response => {
           if (response.data.error_message) {
+            this.error = response.data.error_message;
             console.log(response.data.error_message);
           } else {
             this.address = response.data.results[0].formattes_address;
             // console.log(response.data.results[0].formattes_address);
           }
+          this.spinner = false;
         })
         .catch(error => {
+          this.error = error.message;
+          this.spinner = false;
           console.log(error.message);
         });
     }
